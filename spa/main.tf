@@ -228,7 +228,7 @@ module "cloudfront" {
   ordered_cache_behavior = [
     {
       path_pattern           = "/api/*"
-      target_origin_id       = "vpc_origin"
+      target_origin_id       = "apigw"
       viewer_protocol_policy = "redirect-to-https"
       allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
 
@@ -312,8 +312,31 @@ module "apigw" {
   }
 
   resources = {
+    api = {
+      path_part = "api"
+    }
+    proxy = {
+      path_part  = "{proxy+}"
+      parent_key = "api"
+      methods = {
+        any = {
+          http_method      = "ANY"
+          authorization    = "NONE"
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.backend.technologyhealth.dev.aws.swacorp.com/{proxy}"
+          }
+        }
+      }
+    }
+
     healthcheck_receive = {
       path_part = "healthcheck_receive"
+      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -331,6 +354,7 @@ module "apigw" {
     }
     Operations = { # FIXME - remove when healthcheck_receive is added to backend
       path_part = "Operations"
+      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"

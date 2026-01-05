@@ -1,0 +1,39 @@
+.ui.segment {
+    margin: 0%;
+    border: none;
+    padding: 0%;
+    background: none;
+    height: 82vh;
+}
+
+.ui.form .field {
+    width: 25rem;
+}
+
+.ui.form .field>label {
+    color: #559fff;
+}
+
+.align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui.button {
+    background-color: #2a2c31;
+    color: #559fff;
+}
+
+.ui.button.selected-ritm, .ui.button.ritm:hover {
+    background-color: #559fff;
+    color: #2a2c31;
+}
+
+.ui.positive.message, .ui.negative.message {
+    width: 25%;
+}
+
+.ui.small.modal.transition.visible.active {
+    height: 20%;
+}

@@ -1,0 +1,100 @@
+.card-subtitle {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    color: #f2f4f4;
+    font-size: min(.89rem, 2vw);
+}
+
+.card-subtitle.selected {
+    background-color: #559fff;
+    color: #2a2c31;
+}
+
+.card-subtitle.danger {
+    background-color: #631313;
+}
+
+.application-name {
+    flex: 1 1;
+    margin-right: .6em;
+}
+
+.card-text {
+    color: #d3d3d3;
+    padding: 1% .5% 1% 5%;
+    margin-bottom: 0%;
+    font-size: min(.825rem, 1.75vw);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.card-text i {
+    padding: 0;
+    margin: 0;
+    margin-bottom: .5em;
+}
+
+.card-text.danger {
+    background-color: #631313;
+}
+
+.service-text-and-icons {
+    flex: 1;
+    flex-grow: 1;
+    margin-right: .6em;
+}
+
+.timer-and-status-icon {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+}
+
+.modified-changes.no-design {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+
+.modified-changes.has-changes {
+    border: 2px groove #e67e22;
+    border-radius: 4px;
+    font-style: italic;
+    width: fit-content;
+}
+
+.modified-changes {
+    display: flexbox;
+    flex-wrap: wrap;
+    max-width: fit-content;
+    word-break: break-word;
+    overflow: hidden;
+}
+
+.impacted-changes.no-design {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+}
+
+.impacted-changes.has-changes {
+    border: 2px dashed #4444dd;
+    margin-left: 8px;
+    border-radius: 4px;
+    font-style: italic;
+    width: fit-content;
+}
+
+.impacted-changes {
+    display: flexbox;
+    flex-wrap: wrap;
+    max-width: fit-content;
+    word-break: break-word;
+    overflow: hidden;
+}

@@ -1,0 +1,84 @@
+body {
+    background-color: hsl(0deg 0% 15%);
+    font-family: Arial, sans-serif;
+}
+
+/* h1 {
+    color: #559fff;
+    margin: 0;
+} */
+
+h2 {
+    color: #ff6200;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: .5%;
+    font-size: min(2rem, 2vw);
+}
+
+h3 {
+    font-size: min(1.37rem, 1.3vw);
+    margin-bottom: min(5px, 1vh);
+}
+
+h4 {
+    font-size: min(1.29rem, 1.1vw);
+}
+
+h5 {
+    font-size: min(1.2rem, 1vw);
+}
+
+i {
+    float: right;
+    padding: 0;
+    margin: 10%;
+}
+
+.menu-button-col {
+    flex: 0 0 auto;
+    width: min(40px, 3.5vw);
+    float: none;
+    padding: 0;
+    text-align: center;
+}
+
+.blue.bell.outline.icon {
+    float: none;
+    text-shadow: none;
+    font-size: min(1em, 2.8vw);
+}
+
+.blue.window.outline.icon {
+    float: none;
+    text-shadow: none;
+    font-size: min(1em, 2.8vw);
+}
+
+::-webkit-scrollbar {
+    width: .8vw;
+}
+
+::-webkit-scrollbar-track {
+    background: #555555;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444444;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+}
+
+::-webkit-scrollbar-button {
+    background-color: #555555;
+}
+
+::-webkit-scrollbar-button:hover {
+    background-color: #444444;
+}
+
+.portfolio-div {
+    min-height: 100vh;
+}

@@ -1,0 +1,38 @@
+footer {
+    position: static;
+    width: 100vw;
+}
+
+.legend-row {
+    background-color: #222427;
+    margin: 0;
+    width: 100vw;
+}
+
+.legend-item {
+    width: 12.5vw;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.footer-clock-row {
+    width: 100vw;
+    background-color: #343a40;
+    margin: 0;
+}
+
+.footer-clock {
+    width: 14.28vw;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.legend.icon {
+    float: none !important;
+    padding: 0 !important;
+    margin-right: 0;
+}

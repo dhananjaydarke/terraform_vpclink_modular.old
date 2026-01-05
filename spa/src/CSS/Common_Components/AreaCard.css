@@ -1,0 +1,27 @@
+.area-card {
+    margin-bottom: 3.5%;
+    background-color: #222427;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    color: #559fff;
+    background-color: #2a2c31;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    font-size: min(1.22rem, 2.5vw);
+    overflow: overlay;
+}
+
+.area-card-title {
+    flex: 1 1;
+    margin-right: .6em;
+}
+
+.card-title.danger {
+    color: #ffffff;
+    background-color: #901e1e;
+}

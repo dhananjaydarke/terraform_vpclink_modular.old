@@ -1,0 +1,26 @@
+.container {
+    margin: 0%;
+}
+
+.portfolio-tile {
+    margin-bottom: 1%;
+    margin-top: -1%;
+}
+
+.row {
+    width: 95vw;
+}
+
+@media (width >= 2400px) {
+    .row-cols-custom-5 > * {
+        flex: 0 0 auto;
+        width: 20%;  /* 100% / 5 columns */
+    }
+}
+
+@media (width >= 2800px) {
+    .row-cols-custom-6 > * {
+        flex: 0 0 auto;
+        width: 16.6667%;  /* 100% / 6 columns */
+    }
+}

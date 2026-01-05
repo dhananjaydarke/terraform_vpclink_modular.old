@@ -1,0 +1,221 @@
+.toolbar-container.ui.vertical.menu {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    z-index: 1000;
+    width: 100%;
+    transform: none;
+    left: auto;
+    backdrop-filter: none;
+    margin-bottom: 1rem;
+}
+
+.ui.vertical.menu>.item:last-child {
+    padding: 0;
+}
+
+.ui.button,
+.ui.button:focus {
+    font-size: min(1rem, 1.2vw);
+    border-radius: min(.25rem, .3vw);
+    background-color: #2a2c31;
+    color: #559fff;
+    margin-bottom: .5rem;
+}
+
+.ui.button:hover,
+.ui.button.environment-selected {
+    background-color: #559fff;
+    color: #2a2c31;
+    transform: scale(1.02);
+    margin-bottom: .5rem;
+}
+
+.ui.button.selected,
+.ui.button:active {
+    background-color: #559fff;
+    color: #2a2c31;
+    transform: scale(0.98);
+    margin-bottom: .5rem;
+}
+
+.location-buttons .ui.button {
+    min-width: fit-content;
+    padding: .5rem 1rem;
+    height: auto;
+    white-space: nowrap;
+    border-radius: min(.25rem, .3vw);
+    font-size: min(1rem, 1.2vw);
+}
+
+.toolbar-main-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.toolbar-main-buttons .ui.button {
+    flex: 1;
+    white-space: nowrap;
+    padding: .5rem;
+    text-align: center;
+    margin-left: .5rem;
+}
+
+.app-both-db-buttons {
+    display: flex;
+    justify-content: center;
+    gap: .6rem;
+    width: auto;
+    padding-top: .51rem;
+    align-items: center;
+    min-width: fit-content;
+}
+
+.app-both-db-buttons .ui.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: min(.5rem .75rem);
+    min-width: 5rem;
+    max-width: fit-content;
+    font-size: min(1rem, 1.2vw);
+    border-radius: min(.25rem, .3vw);
+    margin-bottom: .5rem;
+}
+
+.app-both-db-buttons .ui.labeled.button:not(.icon) {
+    display: inline-flex;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    min-width: 6.25rem;
+    font-size: min(1rem, 1.2vw);
+    border-radius: min(.25rem, .3vw);
+}
+
+
+.app-both-db-buttons .ui.labeled.button .ui.button {
+    margin: 0;
+    padding: .65rem;
+}
+
+.ui.button > .icon {
+    margin: 0;
+    font-size: min(1em, 1.2vw);
+}
+
+.app-both-db-buttons .ui.button > .icon {
+    text-shadow: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.app-both-db-buttons .ui.button > .content {
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.location-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .625rem;
+    margin-top: .6rem;
+    width: auto;
+    padding-bottom: .5rem;
+    min-width: fit-content;
+    height: auto;
+    visibility: visible;
+    transform-origin: top;
+    transform: scaleY(1);
+}
+
+
+.location-buttons-centering {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.server.icon,
+.database.icon {
+    background-color: transparent;
+}
+
+.ui.button.modified {
+    color: #e67e22;
+    background-color: #2a2c31;
+    margin-left: .5rem;
+}
+
+.ui.button.modified-selected,
+.ui.button.modified:hover {
+    color: #e67e22;
+    background-color: #2a2c31;
+    margin-left: .5rem;
+    outline: .2rem solid #e67e22;
+    outline-offset: -.2rem;
+}
+
+.ui.button.impacted {
+    color: #5959df;
+    background-color: #2a2c31;
+    margin-left: .5rem;
+}
+
+.ui.button.impacted:hover,
+.ui.button.impacted-selected {
+    color: #5959df;
+    background-color: #2a2c31;
+    margin-left: .5rem;
+    outline: .2rem dashed #4444dd;
+    outline-offset: -.2rem;
+}
+
+.ui.vertical.toolbar-container.menu {
+    padding: 0;
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: -2rem;
+    width: 95%;
+    padding-left: 5%;
+}
+
+.ui.circular.button {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: min(.25rem, .3vw);
+}
+
+/* Hide content */
+.location-buttons:not(:has(*)),
+.location-buttons:empty {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+    transform: scaleY(0);
+}
+
+.ui.icon.left.labeled.button,
+.ui.icon.right.labeled.button {
+    font-size: min(1rem, 1.2vw);
+    border-radius: min(.25rem, .3vw);
+    background-color: #2a2c31;
+    color: #559fff;
+}
+
+.ui.icon.left.labeled.button:hover,
+.ui.icon.right.labeled.button:hover,
+.ui.icon.left.labeled.button.selected,
+.ui.icon.right.labeled.button.selected {
+    background-color: #559fff;
+    color: #2a2c31;
+}

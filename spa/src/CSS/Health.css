@@ -1,0 +1,14 @@
+.health-messages-container {
+    padding: 0;
+    width: 100vw;
+    background-color: #343a40;
+    margin: 0;
+}
+
+.health-menu {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 0;
+    justify-content: right;
+}

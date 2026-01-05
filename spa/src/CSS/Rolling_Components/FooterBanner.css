@@ -1,0 +1,53 @@
+.footer-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: default;
+    height: min(1.4rem, 2.5vh);
+    position: relative;
+}
+
+.about-button {
+    position: absolute;
+    background: none;
+    border: none;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    cursor: default !important;
+    padding: 0 min(5px, .5vw);
+    background-color: #222427;
+}
+
+.about-button:hover {
+    background-color: #343a40;
+}
+
+.about-button-image {
+    width: auto;
+    height: min(1.4rem, 2.5vh);
+}
+
+.flag {
+    width: 100%;
+    height: min(1.4rem, 2.5vh);
+    display: block;
+}
+
+.hover-textbox {
+    position: absolute;
+    bottom: 1.25vw;
+    right: .5vw;
+    z-index: 1;
+    width: min(900px, 35vw);
+    min-height: fit-content;
+    max-height: max-content;
+    border: .01vw solid #000000;
+    background-color: #222427;
+    color: #999999;
+    font-size: min(1.1rem, .85vw);
+    padding: .25vw;
+    box-sizing: border-box;
+}

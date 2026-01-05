@@ -1,0 +1,30 @@
+.liat-body {
+    background-color: #3851a3;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    margin: 0%;
+}
+
+.liat-body-card {
+    background-color: #3851a3;
+    color: #d3d3d3;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0;
+    width: 250%;
+}
+
+.liat-card {
+    border-width: 0;
+    margin: 5%;
+    height: 20%;
+    width: 20%;
+    background-color: inherit;
+}
+
+.liat-portfolio-tile {
+    margin-bottom: 2%;
+}

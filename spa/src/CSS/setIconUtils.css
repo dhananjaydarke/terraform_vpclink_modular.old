@@ -1,0 +1,23 @@
+.stop-watch {
+    float: right;
+    padding-right: 3vw;
+}
+
+.aws.icon {
+    float: none;
+}
+
+.database.icon {
+    float: none;
+}
+
+.grey.exclamation.triangle.icon {
+    float: left;
+    padding-right: 1.5em;
+    text-shadow: none;
+}
+
+.ui.avatar.image {
+    width: 1.5em;
+    height: 1.5em;
+}

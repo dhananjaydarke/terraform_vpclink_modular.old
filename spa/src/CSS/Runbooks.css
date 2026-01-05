@@ -1,0 +1,164 @@
+.ui.vertical.menu.portfolio-table-menu {
+    background-color: #222427;
+    margin: 1%;
+    width: 15vw;
+}
+
+.portfolio-header {
+    margin-bottom: 0 !important;
+}
+
+.area-table {
+    margin-bottom: 2em !important;
+}
+
+.portfolio-table-menu {
+    float: inline-start;
+}
+
+.portfolio-table {
+    flex: 1;
+    margin-right: 20px;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slide-in 1s forwards;
+    padding: 0% !important;
+}
+
+.header {
+    color: #ff6200;
+    background-color: #2a2c31;
+    padding: 1.5%;
+    font-size: min(1.5rem, 5vw) !important;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.runbook-area {
+    margin-left: 3%;
+    align-items: center;
+    text-overflow: ellipsis;
+    text-wrap: auto;
+    overflow: hidden;
+    color: white !important;
+}
+
+.area-name {
+    color: white;
+    font-size: 1.1rem;
+}
+
+.area-icon {
+    justify-self: right;
+}
+
+.runbook-table-container {
+    float: inline-end;
+    width: 82vw;
+    padding: 1%;
+    transform: translateX(-50px);
+    animation: slide-in 1s forwards;
+}
+
+.ui.celled.collapsing.table.runbook-table {
+    background-color: #222427;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.portfolio-table th,
+.portfolio-table tr,
+.portfolio-table thead {
+    background-color: #2a2c31 !important;
+    color: #559fff !important;
+}
+
+.portfolio-table i {
+    float: none;
+    margin-left: 3%;
+}
+
+div.item.portfolio-table {
+    padding: 0%;
+    margin: 0%;
+    text-align: center;
+}
+
+th.center.aligned.runbook-table-header {
+    background-color: #2a2c31;
+    color: #559fff;
+    font-size: larger;
+}
+
+.one.wide.runbook-table-header {
+    text-align: center;
+    color: #559fff;
+    background-color: #2a2c31;
+}
+
+.runbook-table-body {
+    --bs-table-bg: #222427;
+    --bs-table-color: white;
+}
+
+.portfolio-table td {
+    background-color: #222427;
+    color: #ffffff;
+}
+
+.progress-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-bar {
+    margin-bottom: 0 !important;
+}
+
+.progress-percent-and-icon {
+    margin-top: .3em
+}
+
+.times {
+    width: 8%;
+}
+
+.executions {
+    width: 10%;
+}
+
+.text-indent {
+    margin-left: 7%;
+}
+
+.right-justified-data {
+    float: right;
+    margin-right: 5%;
+}
+
+.name-cell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.runbook-and-area-name {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex: 1;
+}
+
+.maintenance-timer {
+    display: flex;
+    background-color: #2b2c31;
+    padding: 2%;
+    margin-left: 2%;
+}
+
+.yellow.wrench.icon.maintenance-icon {
+    align-self: flex-start;
+    padding-left: 7%;
+    padding-right: 1%;
+}

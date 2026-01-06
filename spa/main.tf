@@ -151,9 +151,7 @@ resource "aws_cloudfront_response_headers_policy" "api_cors" {
 	  }
 
     access_control_allow_origins {
-      items = [
-        "https://${module.private_hosted_zones.private_hosted_zone_name}"
-      ]
+      items = ["*"]
     }
 
     origin_override = true
@@ -328,7 +326,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "ANY"
-            uri                  = "https://${aws_lb.backend_nlb.dns_name}/{proxy}"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}/{proxy}"
           }
         }
       }
@@ -347,7 +345,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "GET"
-            uri                  = "https://${aws_lb.backend_nlb.dns_name}/healthcheck_receive"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}/healthcheck_receive"
           }
         }
       }
@@ -365,7 +363,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "GET"
-            uri                  = "https://${aws_lb.backend_nlb.dns_name}/Operations"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}/Operations"
           }
         }
       }
@@ -414,7 +412,7 @@ resource "aws_lb" "backend_nlb" {
 # Target Group pointing to ALB
 resource "aws_lb_target_group" "vpc_link_tg" {
   name        = "${module.root_labels.namespace}-vpc-link-tg"
-  port        = 443
+  port        = 80
   protocol    = "TCP"
   vpc_id      = data.terraform_remote_state.vpc_network.outputs["vpc_id"]
   target_type = "alb"
@@ -423,8 +421,8 @@ resource "aws_lb_target_group" "vpc_link_tg" {
     enabled             = true
     healthy_threshold   = 2
     interval            = 30
-    protocol            = "HTTPS"
-    port                = "443"
+    protocol            = "HTTP"
+    port                = "80"
     path                = "/Operations"
     matcher             = "200"
     timeout             = 10
@@ -444,7 +442,7 @@ resource "aws_lb_target_group_attachment" "alb_attachment" {
 # NLB Listener
 resource "aws_lb_listener" "backend_listener" {
   load_balancer_arn = aws_lb.backend_nlb.arn
-  port              = "443"
+  port              = "80"
   protocol          = "TCP"
 
   default_action {

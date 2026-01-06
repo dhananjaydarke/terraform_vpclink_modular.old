@@ -76,9 +76,7 @@ module "alb" {
       protocol = "HTTP"
 
       redirect = {
-        port        = "443"
-        protocol    = "HTTPS"
-        status_code = "HTTP_301"
+                target_group_key = "ecs_tg"
       }
     }
     ex_https = {

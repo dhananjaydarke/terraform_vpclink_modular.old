@@ -147,8 +147,8 @@ resource "aws_cloudfront_response_headers_policy" "api_cors" {
     }
 
     access_control_allow_methods {
-      items = ["GET", "OPTIONS"]
-    }
+      items = ["GET", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]]
+	  }
 
     access_control_allow_origins {
       items = [
@@ -235,7 +235,7 @@ module "cloudfront" {
       //cached_methods             = ["GET", "HEAD"]
       use_forwarded_values       = false
       cache_policy_name          = "Managed-CachingDisabled"
-      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      origin_request_policy_name = "Managed-AllViewer"
       //response_headers_policy_name = aws_cloudfront_response_headers_policy.api_cors.name
       response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
 
@@ -391,13 +391,6 @@ module "apigw" {
       ]
       actions   = ["execute-api:Invoke"]
       resources = ["*"]
-
-      conditions = {
-        StringEquals = {
-          "aws:SourceVpc" = data.terraform_remote_state.vpc_network.outputs["vpc_id"]
-        }
-      }
-
     }
   ]
 }

@@ -328,7 +328,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "ANY"
-            uri                  = "https://app.backend.technologyhealth.dev.aws.swacorp.com/{proxy}"
+            uri                  = "https://${aws_lb.backend_nlb.dns_name}/{proxy}"
           }
         }
       }
@@ -347,7 +347,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "GET"
-            uri                  = "https://app.backend.technologyhealth.dev.aws.swacorp.com/healthcheck_receive"
+            uri                  = "https://${aws_lb.backend_nlb.dns_name}/healthcheck_receive"
           }
         }
       }
@@ -365,7 +365,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "GET"
-            uri                  = "https://app.backend.technologyhealth.dev.aws.swacorp.com/Operations"
+            uri                  = "https://${aws_lb.backend_nlb.dns_name}/Operations"
           }
         }
       }

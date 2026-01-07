@@ -326,7 +326,7 @@ module "apigw" {
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "ANY"
-            uri                  = "http://${aws_lb.backend_nlb.dns_name}/{proxy}"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}:80/{proxy}"
           }
         }
       }
@@ -339,13 +339,13 @@ module "apigw" {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          integration_type = "HTTP"
+          integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
-            integration_method   = "GET"
-            uri                  = "http://${aws_lb.backend_nlb.dns_name}/healthcheck_receive"
+            integration_method   = "ANY"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}:80/healthcheck_receive"
           }
         }
       }
@@ -357,13 +357,13 @@ module "apigw" {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          integration_type = "HTTP"
+          integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
             connection_type      = "VPC_LINK"
-            vpc_link_key         = "main"
+            vpc_link_key         = "ANY"
             integration_method   = "GET"
-            uri                  = "http://${aws_lb.backend_nlb.dns_name}/Operations"
+            uri                  = "http://${aws_lb.backend_nlb.dns_name}:80/Operations"
           }
         }
       }

@@ -1,0 +1,62 @@
+formatter: 'markdown table'  # this is required
+
+# Version: Not specified, will use the latest version of terraform-docs
+version: ''
+
+# Not generating anything from separate Header/Footer files
+# header-from: main.tf
+# footer-from: ''
+
+# Recursive settings: Documentation generation is not recursive
+recursive:
+  enabled: false
+
+# Sections: Hide the 'modules' section, show all other default sections
+sections:
+  hide: []
+  show: []
+
+# Content: Define the structure of the generated documentation
+content: |-
+  ## Usage
+
+  This module is called from the root `main.tf` file in the terraform directory, allowing you to create multiple resources with different configurations.
+
+  ## Makefile Targets
+
+  The template includes a `Makefile` that defines a variety of commonly used commands. Run `make help` to list available commands
+
+# Output: Specify how and where to inject the generated documentation
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+# Output values: Disabled
+output-values:
+  enabled: false
+  from: ''
+
+# Sorting: Enable sorting of documentation elements by required
+sort:
+  enabled: true
+  by: required
+
+# Additional settings for documentation generation
+settings:
+  anchor: false
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: false
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: false
+  sensitive: true
+  type: true

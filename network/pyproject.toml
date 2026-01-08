@@ -1,0 +1,49 @@
+[project]
+authors = [
+  {email = "EC-CloudCommonPod-DG@wnco.com", name = "Enterprise Cloud"},
+]
+description = "Terraform Multi-Region Deployment template"
+dynamic = ["dependencies"]
+name = "ccp-next-deployment-template"
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+version = "1.24.0"
+
+[tool.poetry]
+package-mode = false
+requires-poetry = ">=2.0"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+ccp-next-general-resources = {source = "swa-releases", version = ">=1.6.3,<2.0"}
+checkov = "^3.2.416"
+pre-commit = "^4.3.0"
+
+[tool.poetry.group.test.dependencies]
+boto3 = "^1.40.40"
+pytest = "^8.4.2"
+
+[[tool.poetry.source]]
+name = "swa-releases"
+priority = "supplemental"
+url = "https://nexus-tools.swacorp.com/repository/pypi-releases/simple"
+
+[[tool.poetry.source]]
+name = "swa-dev"
+priority = "supplemental"
+url = "https://nexus-tools.swacorp.com/repository/pypi-dev/simple"
+
+[tool.tomlsort]
+all = true
+in_place = true
+sort_first = ["project", "tool", "tool.poetry"]
+spaces_before_inline_comment = 2
+trailing_comma_inline_array = true
+overrides."tool.poetry".first = ["name", "version"]
+overrides."tool.poetry.dependencies".first = ["python"]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.7"]

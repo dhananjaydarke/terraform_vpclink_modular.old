@@ -1,0 +1,60 @@
+[project]
+name = "ccp-next-ecs-template"
+version = "3.0.0"
+authors = [
+  {email = "<EC-CloudCommonPod-DG@wnco.com>", name = "Enterprise Cloud"},
+]
+classifiers = [
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.9",
+]
+description = "Example TF Project for creating ECS clusters and services"
+dynamic = ["dependencies"]
+readme = "README.md"
+requires-python = ">=3.12,<4.0"
+
+[tool.poetry]
+package-mode = false
+requires-poetry = ">=2.0"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+[tool.poetry.group.dev.dependencies]
+ccp-next-general-resources = {source = "swa-releases", version = ">=1.6.4,<2.0"}
+checkov = "^3.2.406"
+pre-commit = "^4.3.0"
+
+[[tool.poetry.source]]
+name = "swa-pypi"
+priority = "primary"
+url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
+
+[[tool.poetry.source]]
+name = "swa-releases"
+priority = "supplemental"
+url = "https://nexus-tools.swacorp.com/repository/pypi-releases/simple"
+
+[[tool.poetry.source]]
+name = "swa-dev"
+priority = "supplemental"
+url = "https://nexus-tools.swacorp.com/repository/pypi-dev/simple"
+
+[tool.tomlsort]
+all = true
+in_place = true
+sort_first = ["project", "tool", "tool.poetry"]
+spaces_before_inline_comment = 2
+trailing_comma_inline_array = true
+overrides."project".first = ["name", "version"]
+overrides."tool.poetry.dependencies".first = ["python"]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=2.0.0,<3.0.0"]

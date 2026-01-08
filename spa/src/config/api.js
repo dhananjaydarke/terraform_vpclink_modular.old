@@ -12,15 +12,6 @@ const getBaseUrl = () => {
         return `${window.location.protocol}//${hostname}:3000`
     }
     return `${window.location.protocol}//${hostname}/api`
-    // Production - adjust based on your actual API setup
-    //if (hostname && (hostname.includes('technologyhealth.swacorp.com') || hostname.includes('cloudfront.net'))) {
-    //    return 'https://technologyhealth.swacorp.com'
-    //    return `${window.location.protocol}//${hostname}/api`
-
-    //}
-
-    // Default fallback
-    //return `${window.location.protocol}//${hostname || 'localhost'}:3000`
 }
 
 
@@ -42,7 +33,7 @@ const API_CONFIG = {
         LOCATION_DATA: '/Location',
         LIAT_DATA: '/LIAT',
         RUNBOOK_JSON: '/RunbookJSON',
-        //OPERATIONS: '/Operations'
+        // OPERATIONS: '/Operations'
 
     }
 }

@@ -18,7 +18,6 @@ const tabsData = [
 ]
 
 
-
 const Rolling = () => {
     const [isMuted, setIsMuted] = useState(true)
     const [expandCollapseIcon, setExpandCollapseIcon] = useState('window maximize outline')

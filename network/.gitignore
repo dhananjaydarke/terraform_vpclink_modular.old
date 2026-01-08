@@ -1,0 +1,14 @@
+**/*.tfstate
+**plan-checkov.json
+**plan.out
+.external_modules
+.general-resources
+.general-resources.mk
+.python-version
+.terraform/
+.tool-versions
+.venv/
+builds/
+deployment_env_setup.sh
+node_modules/
+terraform.log

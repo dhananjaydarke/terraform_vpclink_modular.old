@@ -30,11 +30,6 @@
     height: min(1.4rem, 2.5vh);
 }
 
-.flag {
-    width: 100%;
-    height: min(1.4rem, 2.5vh);
-    display: block;
-}
 
 .hover-textbox {
     position: absolute;

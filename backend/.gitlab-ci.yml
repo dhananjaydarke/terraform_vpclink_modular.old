@@ -1,0 +1,17 @@
+variables:
+  PYTHON_BUILD_DISABLED: 'true'
+  SONAR_BUILDBREAKER_DISABLED: 'true'
+  UNIT_TEST_DISABLED: 'true'
+
+include:
+  - project: swa-common/ccp/ccplat-pipeline-fragments
+    ref: v5
+    file: /pipelines/build-module.gitlab-ci.yml
+  - component: $CI_SERVER_FQDN/swa-common/devplat/components/sonar/sonar@v2.0.0
+    inputs:
+      job-stage: sonar_scan
+      allow-failure: true
+      scan-job-name: sonar_scan
+curate-ecr:
+  rules:
+    - when: always

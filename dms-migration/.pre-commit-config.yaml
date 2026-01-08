@@ -1,0 +1,76 @@
+default_language_version:
+  node: system
+  golang: "1.24.6"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-json
+        exclude: .devcontainer/devcontainer.json
+      - id: check-merge-conflict
+      - id: check-yaml
+        args:
+          - --unsafe  # needed for parsing CFN
+      - id: end-of-file-fixer
+      - id: file-contents-sorter
+        args: [--unique]
+        files: |
+          (?x)^(
+            \.dockerignore|
+            \.gitignore
+          )$
+      - id: pretty-format-json
+        args: [--autofix, --indent, '4']
+        files: |
+          (?x)^(
+            \.gitlab/.*\.json|
+            \.vscode/.*\.json
+          )$
+      - id: pretty-format-json
+        args: [--autofix, --indent, '2']
+        files: |
+          (?x)^(
+            (.*)?(cdk|package|tsconfig|tslint).json
+          )$
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.24.3
+    hooks:
+      - id: toml-sort-fix
+        exclude: (^poetry.lock$)
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.17.2
+    hooks:
+      - id: yamlfmt
+        args: ["-formatter=retain_line_breaks=true,pad_line_comments=2,trim_trailing_whitespace=true,eof_newline=true"]
+        exclude: (^.gitlab-ci.yml$|.gitlab-deployments-ci.yml)
+  # # uncomment if you want mdformat temporarily. conflicts with terraform-docs-go
+  # # should be commented out again
+  # - repo: https://github.com/executablebooks/mdformat
+  #   rev: 0.7.17
+  #   hooks:
+  #     - id: mdformat
+  #       exclude: (^\.gitlab/merge_request_templates/default.md$)
+  #       additional_dependencies:
+  #         - mdformat-black
+  #         - mdformat-tables
+  #         - mdformat-toc
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.100.1
+    hooks:
+      - id: terraform_fmt
+        args:
+          - --args=-write=true -recursive
+  - repo: https://github.com/terraform-docs/terraform-docs
+    rev: v0.20.0
+    hooks:
+      - id: terraform-docs-go
+        args: [./]
+      - id: terraform-docs-go
+        args: [./terraform]

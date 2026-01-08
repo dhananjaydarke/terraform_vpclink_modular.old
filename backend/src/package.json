@@ -51,13 +51,11 @@
     "node": ">=18.18.0"
   },
   "resolutions": {
-    "cross-spawn": "^7.0.6",
-    "urllib3": "^2.5.0"
+    "cross-spawn": "^7.0.6"
   },
   "overrides": {
     "semver": "^7.6.0",
     "cross-spawn": "^7.0.6",
-    "urllib3": "^2.5.0",
     "@azure/identity": "^4.2.1"
   }
 }

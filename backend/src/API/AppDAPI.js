@@ -12,7 +12,7 @@ const dbStates = new Map()
 
 const appDRequest = {
     'method': 'GET',
-    'hostname': 'appdynamics.com',
+    'hostname': 'Aappdynamics.com',
     'headers': {
         'Authorization': process.env.APPD_AUTH_HEADER
     },

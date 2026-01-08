@@ -1,0 +1,69 @@
+formatter: 'markdown table'
+
+version: ''
+
+# Not generating anything from separate Header/Footer files
+# header-from: main.tf
+# footer-from: ''
+
+recursive:
+  enabled: false
+
+sections:
+  hide: []
+  show: []
+
+content: |-
+  ## Examples
+
+  <details>
+    <summary>ECS on EC2</summary>
+
+  {{ include "examples/ecs_in_vpc_with_ec2/README.md" }}
+
+  </details>
+  <details>
+    <summary>ECS on Fargate</summary>
+
+  {{ include "examples/ecs_in_vpc_with_alb_fargate/README.md" }}
+
+  </details>
+
+  ### Usage
+
+  These modules are called from the root `main.tf` file, allowing you to create multiple combinations of ECS Deployments with different configurations. The root `main.tf` also sets up shared resources like the IAM role for Lambda execution.
+
+  ## Makefile Targets
+
+  The template includes a `Makefile` that defines a variety of commonly used commands.  Run `make help` to list available commands
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ''
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  anchor: false
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: false
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: false
+  sensitive: true
+  type: true

@@ -1,0 +1,7 @@
+default: true
+MD013: false  # line-length
+MD014: false  # commands-show-output
+MD024: false  # no-duplicate-heading/no-duplicate-header
+MD033: false  # no-inline-html
+MD025: false  # single-h1
+MD001: false  # header-increment

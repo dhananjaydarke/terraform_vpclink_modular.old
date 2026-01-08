@@ -1,0 +1,64 @@
+formatter: 'markdown table'
+
+version: ''
+
+# Not generating anything from separate Header/Footer files
+# header-from: main.tf
+# footer-from: ''
+
+recursive:
+  enabled: false
+
+sections:
+  hide: []
+  show: []
+
+content: |-
+  ## `terraform-docs`
+
+  > :information_source: Showing example of adding dynamic contents below from other files in your markdown docs.
+  > Check [.terraform-docs.yml](.terraform-docs.yml), [terraform/.terraform-docs.yml](terraform/.terraform-docs.yml) and [.pre-commit-config.yaml](.pre-commit-config.yaml) config files or [tf-docs documentation](https://terraform-docs.io/) for more details.
+  > Notice that there are different configuration for `terraform-docs` for different dynamic contents in different markdown files.
+  >
+  > :information_source: Keep documentation clear, concise, and purposeful. Focus only on essential details users need, avoiding unnecessary information that can obscure key points.
+  > Well-structured, minimal, and direct documentation makes it easier for users to quickly understand and apply the information.
+
+  <details>
+    <summary>Example Provider Config</summary>
+
+  ```terraform
+  {{ include "terraform/provider.tf" }}
+  ```
+
+  </details>
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+output-values:
+  enabled: false
+  from: ''
+
+sort:
+  enabled: true
+  by: required
+
+settings:
+  anchor: false
+  color: true
+  default: true
+  description: false
+  escape: true
+  hide-empty: true
+  html: false
+  indent: 2
+  lockfile: true
+  read-comments: true
+  required: false
+  sensitive: true
+  type: true

@@ -1,0 +1,75 @@
+# Deploy Environments
+dev:  # Environment
+  dev0:  # CCP Namespace
+    # (optional) If you wish to override TLG default environment/account number where resources will be deployed.
+    # Defaults to empty which uses TLG default environment/account number.
+    # aws_account_number:
+
+    # (optional)Unset if you want to disable (NOT recommended) EAS attestation.
+    # Defaults to `true`
+    generate_attestation: true
+
+    # (optional) Runner tags to filter and schedule CCP-Next deployment jobs on specific runners.
+    runner_tag:  # defaults to `build-runner`. use `arm-runner` to use arm runners
+      - build-runner
+
+    # (optional) If `generate_attestation` is true, user-supplied script is executed to expose additional environment variables.
+    # additional_attestation_data_script:
+
+    # (optional) Used to override the command: swauto_devops, which is used for executing job scripts within swautodevops-libraries.
+    # swautodevops_script:
+
+    variables:  # You can pass environment variables for namespace level deployment jobs
+      # ***WARNING***: You have to get exemption from CloudSec (Slack channel: #team-cloudsecurity)
+      # to suppress any vulnerabilities.
+      #
+      # Showing how you can suppress a rule. Checkov will still show you the errors but will exit with 0
+      # As a result pipeline will show green.
+      #
+      # Default is `--quiet --support --repo-root-for-plan-enrichment terraform --soft-fail-on MEDIUM`.
+      #
+      # Use this only when you have exemptions from CloudSec for checks that cannot be resolved.
+      #
+      # Use this option if you want to override default options per namespace.
+      # If you want to set these options for all namespaces then set as variables in `.gitlab-ci.yml` file.
+      # This will override the options set for all namespaces in `.gitlab-ci.yml` file.
+      #
+      # Check https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html for checkov option
+      OPTS_CHECKOV_IAC_SCAN: --quiet --support --soft-fail-on MEDIUM,CKV_TF_1,CKV2_AWS_11,CKV2_AWS_12
+
+      # # Check out:
+      # # to learn more about post-deploy jobs.
+      # #
+      # # `POST_DEPLOY_CMD` options if you want to override. Defaults to `post_deploy/test.py`
+      # OPTS_POST_DEPLOY:
+      # #
+      # # Extra env vars like VAR1=val1 VAR2=val2 for `POST_DEPLOY_CMD`
+      # POST_DEPLOY_ENV_VARS:
+      # #
+      # # Command to run for post-deploy jobs. Defaults to `poetry run pytest`
+      # POST_DEPLOY_CMD:
+      # #
+      ENABLE_POST_DEPLOY_JOB: "true"
+      # # You can also inject terraform tfvars with the following environment vars
+      # # TF vars injected from the environment have least precedence
+      # # Doc: https://developer.hashicorp.com/terraform/language/values/variables
+      # TF_VAR_ami_id: ami-1234
+
+      # Automate dev apply (deploy/destroy)
+      # CAUTION: it is recommended to set this per namespace to avoid causing issues for other namespaces
+      AUTO_DEV_APPLY: false
+      # Check https://docs.gitlab.com/ee/ci/resource_groups/ for details
+      # Set this if you want to control deployment order for your deployment jobs
+      # Especially useful with `AUTO_DEV_APPLY` where all dev deployment jobs are run concurrently with default settings
+      # Same resource group will be used for plan, deploy, destroy and deploy-tagging jobs
+      DEPLOYMENT_RESOURCE_GROUP: ${NAMESPACE}
+      # NOT Recommended
+      # This is a temporary workaround for a limitation with EAS
+      # Useful especially when you have both `AUTO_DEV_APPLY` and `DEPLOYMENT_RESOURCE_GROUP` set.
+      # Deploy tagging jobs will remove the wait from a job when we know tagging job fails as EAS is not able to handle AWS credentials vars per `namespace`.
+      DEV_DEPLOY_TAGGING_FAILURE_ALLOWED: true
+      # # Override a tool version.
+      # # Use this only when you are blocked on CCP Next image updates.
+      # # Remove as soon as CCP Next pipeline images were updated to latest after an issue or feat request was raised
+      # FF_KUBERNETES_HONOR_ENTRYPOINT: true
+      # TERRAFORM_VERSION: "1.10.0"

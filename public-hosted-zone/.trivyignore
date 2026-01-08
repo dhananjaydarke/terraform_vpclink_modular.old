@@ -1,0 +1,5 @@
+# ***WARNING***: You have to get exemption from CloudSec (Slack channel: #team-cloudsecurity) to suppress any vulnerabilities.
+# This is an example of showing how to suppress some Trivy checks.
+
+# coming from cloudposse s3 module: `HIGH: IAM policy document uses wildcarded action 's3:Get*'`
+AVD-AWS-0057

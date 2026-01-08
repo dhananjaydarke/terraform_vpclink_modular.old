@@ -1,28 +1,5 @@
 module.exports = {
   apps: [
-    // {
-    //   name: 'pullCerts',
-    //   script: 'pullCerts.js',
-    //   env: {
-    //     NODE_ENV: 'development',
-    //     LOG_LEVEL: 'debug',
-    //     pm_name: 'pullCerts'
-    //   },
-    //   env_qa: {
-    //     NODE_ENV: 'qa',
-    //     LOG_LEVEL: 'info',
-    //     pm_name: 'pullCerts'
-    //   },
-    //   env_production: {
-    //     NODE_ENV: 'production',
-    //     LOG_LEVEL: 'warn',
-    //     pm_name: 'pullCerts'
-    //   },
-    //   log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
-    //   merge_logs: true,
-    //   out_file: '/dev/stdout',
-    //   error_file: '/dev/stderr'
-    // },
     {
       name: 'backend',
       script: './Server.js',

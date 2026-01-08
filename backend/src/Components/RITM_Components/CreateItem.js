@@ -315,7 +315,7 @@ async function authorizeAppDApp(alertName, apiKey) {
     try {
         const options = {
             'method': 'GET',
-            'hostname': 'appdynamics.com',
+            'hostname': 'Appdynamics.com',
             'path': `/controller/alerting/rest/v1/applications/${apiKey}/health-rules/`,
             'headers': {
                 'Authorization': process.env.APPD_AUTH_HEADER
@@ -371,7 +371,7 @@ async function authorizeAppDDb(alertName) {
         const suffix = '_DB'
         const options = {
             'method': 'GET',
-            'hostname': 'southwest-prod.saas.appdynamics.com',
+            'hostname': 'Appdynamics.com',
             'path': `/controller/rest/databases/collectors`,
             'headers': {
                 'Authorization': process.env.APPD_AUTH_HEADER

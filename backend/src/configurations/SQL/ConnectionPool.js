@@ -4,7 +4,6 @@ const password = process.env.THD_DB_PASS
 const username = process.env.THD_DB_USER
 
 
-
 const config = {
     user: process.env.THD_DB_USER,
     password: process.env.THD_DB_PASS,

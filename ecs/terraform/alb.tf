@@ -7,15 +7,15 @@ module "alb" {
 
   load_balancer_type = "application"
 
-  # INFO: (SWA-Standard) requires ALBs to be internal
+  # INFO: (DDARKE-Standard) requires ALBs to be internal
   internal = true
 
   vpc_id  = data.aws_vpc.vpc_id.id
   subnets = data.aws_subnets.private_subnets.ids
 
-  # INFO: (SWA-Standard) requires access logs be enabled.
+  # INFO: (DDARKE-Standard) requires access logs be enabled.
   access_logs = {
-    bucket = "swa-central-logging-${var.region}"
+    bucket = "DDARKE-central-logging-${var.region}"
   }
 
   # INFO: Checkov recommends deletion protection be enabled
@@ -69,7 +69,7 @@ module "alb" {
     }
   }
 
-  # INFO: (SWA-Standard) requires listeners to be HTTPS
+  # INFO: (DDARKE-Standard) requires listeners to be HTTPS
   listeners = {
     ex_http = {
       port     = 80
@@ -94,9 +94,9 @@ module "alb" {
     }
   }
 
-  # INFO: (SWA-Standard) requires target groups to be HTTPS
+  # INFO: (DDARKE-Standard) requires target groups to be HTTPS
   #       Pipeline security tools may flag using HTTP to connect the ALB to your container.
-  #       Check with security or your architect to ensure SWA standards are being met.
+  #       Check with security or your architect to ensure DDARKE standards are being met.
   target_groups = {
     ecs_tg = {
       backend_protocol                  = "HTTP" #INFO: CKV_AWS_378: "Ensure AWS Load Balancer doesn't use HTTP protocol"

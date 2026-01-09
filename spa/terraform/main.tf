@@ -6,7 +6,7 @@
 # }
 
 # resource "aws_route53_zone" "private" {
-#   name          = "${module.root_labels.environment}.technologyhealth.swacorp.com"
+#   name          = "${module.root_labels.environment}.technologyhealth.ddarkecorp.com"
 #   force_destroy = true
 #   vpc {
 #     vpc_id = data.terraform_remote_state.vpc_network.outputs["vpc_id"]
@@ -16,7 +16,7 @@
 module "private_hosted_zones" { # creates private_hz and no apex_hz
   # use versioned module reference
   version         = "0.5.1"
-  private_hz_name = "backend.technologyhealth.${module.root_labels.environment}.aws.swacorp.com"
+  private_hz_name = "backend.technologyhealth.${module.root_labels.environment}.aws.ddarkecorp.com"
   vpc = [
     { vpc_id = data.terraform_remote_state.vpc_network.outputs["vpc_id"] }
   ]
@@ -32,7 +32,7 @@ module "s3_bucket_cf_primary" {
     rule = {
       apply_server_side_encryption_by_default = {
         sse_algorithm     = "aws:kms"
-        kms_master_key_id = data.aws_kms_alias.swa_kms.arn
+        kms_master_key_id = data.aws_kms_alias.ddarke_kms.arn
       }
       bucket_key_enabled = true
     }
@@ -89,7 +89,7 @@ resource "aws_route53_record" "cloudfront_app_domain" {
 resource "aws_route53_record" "cloudfront_public_domain" {
   name    = one(data.terraform_remote_state.public_hosted_zone.outputs.hosted_zone_names)
   type    = "A"
-  zone_id = data.terraform_remote_state.public_hosted_zone.outputs.hosted_zone_ids["technologyhealth.${module.root_labels.environment}.aws.swacorp.com"]
+  zone_id = data.terraform_remote_state.public_hosted_zone.outputs.hosted_zone_ids["technologyhealth.${module.root_labels.environment}.aws.ddarkecorp.com"]
 
   alias {
     name                   = module.cloudfront.cloudfront_distribution_domain_name
@@ -106,9 +106,9 @@ resource "aws_cloudfront_function" "append_index_path" {
   code    = file("${path.cwd}/cloudfront_function.js")
 }
 
-module "swa_only_waf" {
+module "ddarke_only_waf" {
   version                       = "0.6.3"
-  waf_type                      = "cloudfront-swa-only"
+  waf_type                      = "cloudfront-ddarke-only"
   namespace                     = var.namespace
   context                       = module.root_labels.context
   cloudfront_rate_based_limit   = 1000
@@ -167,7 +167,7 @@ resource "aws_cloudwatch_log_group" "waf_cloudfront_logs" {
 }
 
 resource "aws_wafv2_web_acl_logging_configuration" "cloudfront_waf_logging" {
-  resource_arn            = module.swa_only_waf.waf_arn
+  resource_arn            = module.ddarke_only_waf.waf_arn
   log_destination_configs = [aws_cloudwatch_log_group.waf_cloudfront_logs.arn]
 }
 
@@ -294,11 +294,11 @@ module "cloudfront" {
     }
   ]
 
-  web_acl_id = module.swa_only_waf.waf_arn
+  web_acl_id = module.ddarke_only_waf.waf_arn
   aliases    = [module.private_hosted_zones.private_hosted_zone_name]
 
   viewer_certificate = {
-    acm_certificate_arn            = data.terraform_remote_state.certificate.outputs["cloudfront_cert_arns"]["technologyhealth.${module.root_labels.environment}.aws.swacorp.com"]
+    acm_certificate_arn            = data.terraform_remote_state.certificate.outputs["cloudfront_cert_arns"]["technologyhealth.${module.root_labels.environment}.aws.ddarkecorp.com"]
     ssl_support_method             = "sni-only"
     minimum_protocol_version       = "TLSv1.2_2021"
     cloudfront_default_certificate = true

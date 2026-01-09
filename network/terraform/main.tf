@@ -7,11 +7,11 @@ module "vpc" {
   # certificate_arn_tf_state_key = var.certificate_arn_tf_state_key
 }
 
-# Resource for provisioning a private cert using the SWA common PCA for a specific env and region.
+# Resource for provisioning a private cert using the ddarke common PCA for a specific env and region.
 resource "aws_acm_certificate" "cert" {
-  domain_name               = "backend.technologyhealth.${var.environment}.aws.swacorp.com"
-  subject_alternative_names = ["*.backend.technologyhealth.${var.environment}.aws.swacorp.com"]
-  certificate_authority_arn = data.aws_ssm_parameter.swa_pca_arn_share.value
+  domain_name               = "backend.technologyhealth.${var.environment}.aws.ddarkecorp.com"
+  subject_alternative_names = ["*.backend.technologyhealth.${var.environment}.aws.ddarkecorp.com"]
+  certificate_authority_arn = data.aws_ssm_parameter.ddarke_pca_arn_share.value
   key_algorithm             = "RSA_2048"
   lifecycle {
     create_before_destroy = true

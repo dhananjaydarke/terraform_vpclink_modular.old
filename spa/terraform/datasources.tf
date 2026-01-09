@@ -22,15 +22,15 @@ data "aws_iam_policy_document" "s3_policy" {
   }
 }
 
-# Grab swa kms key to be used for s3 bucket encryption
-data "aws_kms_alias" "swa_kms" {
-  name = "alias/swa_${data.aws_caller_identity.current.account_id}_kms"
+# Grab ddarke kms key to be used for s3 bucket encryption
+data "aws_kms_alias" "ddarke_kms" {
+  name = "alias/ddarke_${data.aws_caller_identity.current.account_id}_kms"
 }
 
 data "terraform_remote_state" "vpc_network" {
   backend = "s3"
   config = {
-    bucket = "swa-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
+    bucket = "ddarke-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
     key    = var.vpc_tf_state_key
     region = var.region
   }
@@ -39,7 +39,7 @@ data "terraform_remote_state" "vpc_network" {
 data "terraform_remote_state" "certificate" {
   backend = "s3"
   config = {
-    bucket = "swa-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
+    bucket = "ddarke-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
     key    = var.certificate_arn_tf_state_key
     region = var.region
   }
@@ -48,7 +48,7 @@ data "terraform_remote_state" "certificate" {
 data "terraform_remote_state" "public_hosted_zone" {
   backend = "s3"
   config = {
-    bucket = "swa-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
+    bucket = "ddarke-ec-tf-state-${data.aws_caller_identity.current.account_id}-${var.region}"
     key    = var.public_hosted_zone_tf_state_key
     region = var.region
   }

@@ -15,7 +15,7 @@ resource "aws_route53_zone" "public_hosted_zone" {
   delegation_set_id = aws_route53_delegation_set.main.id
   force_destroy     = true
   tags = merge(var.tags, {
-    "SWA:Environment" = var.environment
+    "ddarke:Environment" = var.environment
   })
 }
 

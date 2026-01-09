@@ -58,7 +58,7 @@ variables:
     description: Select a region to apply infrastructure changes to
 
 include:
-  - project: swa-common/devplat/ccp-next/ccp-next-pipeline-fragments
+  - project: ddarke-common/devplat/ccp-next/ccp-next-pipeline-fragments
     ref: 1.35.0
     file: pipelines/deploy-infra.gitlab-ci.yml
   - local: .gitlab-deployments-ci.yml

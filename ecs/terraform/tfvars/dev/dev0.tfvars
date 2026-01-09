@@ -14,9 +14,9 @@ sleep_wake_enabled         = true
 
 vpc_tag_name = "eto-dev-dev0-vpc"
 
-certificate_domain = "dev.technologyhealth.swacorp.com"
+certificate_domain = "dev.technologyhealth.ddarkecorp.com"
 container_image    = "290503755741.dkr.ecr.us-west-2.amazonaws.com/sre/opsmon/frontend-deployment/backend:etothd-1038"
-private_zone_name  = "dev.technologyhealth.swacorp.com"
+private_zone_name  = "dev.technologyhealth.ddarkecorp.com"
 
 thd_secret_name     = "thd-db/dev"
 dash_secret_name    = "dash-db/dev"

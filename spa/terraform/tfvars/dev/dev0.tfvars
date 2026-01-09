@@ -4,6 +4,6 @@ vpc_tf_state_key                = "sre/opsmon/infrastructure-deployment/network/
 certificate_arn_tf_state_key    = "sre/opsmon/infrastructure-deployment/public-hosted-zone/dev0/terraform.tfstate"
 public_hosted_zone_tf_state_key = "sre/opsmon/infrastructure-deployment/public-hosted-zone/dev0/terraform.tfstate"
 
-# vpc_origin_domain_name    = "app.backend.technologyhealth.dev.aws.swacorp.com" // FIXME - Hardcoded
+# vpc_origin_domain_name    = "app.backend.technologyhealth.dev.aws.ddarkecorp.com" // FIXME - Hardcoded
 vpc_origin_name           = "thd-dev-vpc-origin-backend-internal"
 vpc_origin_domain_name_cf = "thd-dev-vpc-origin-backend.internal"

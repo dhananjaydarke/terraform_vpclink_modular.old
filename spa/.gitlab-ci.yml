@@ -44,7 +44,7 @@ variables:
   #
   # Soft failing on (false-positvies)
   #
-  # 806079905565028352_AWS_1728321732009: "SWA - AWS Ensure encrypted S3 bucket is using a SWA KMS key"
+  # 806079905565028352_AWS_1728321732009: "ddarke - AWS Ensure encrypted S3 bucket is using a ddarke KMS key"
   #
   # Explanation:
   # As they are coming from "terraform-aws-modules/s3-bucket/aws" public module defaults but when deploying these are all configured properly.
@@ -76,12 +76,12 @@ variables:
     description: Select a region to apply infrastructure changes to
 
 include:
-  - project: swa-common/devplat/ccp-next/ccp-next-pipeline-fragments
+  - project: ddarke-common/devplat/ccp-next/ccp-next-pipeline-fragments
     ref: 2.13.0
     file: pipelines/deploy-infra.gitlab-ci.yml
   - local: .gitlab-deployments-ci.yml
   # FIXME: need sonar scan in prod
-  # - component: $CI_SERVER_FQDN/swa-common/devplat/components/sonar/sonar@v2.14.0
+  # - component: $CI_SERVER_FQDN/ddarke-common/devplat/components/sonar/sonar@v2.14.0
   #   inputs:
   #     job-stage: sonar_scan
   #     allow-failure: false

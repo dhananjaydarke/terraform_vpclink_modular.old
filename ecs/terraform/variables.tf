@@ -118,5 +118,5 @@ variable "task_cpu" {
 variable "private_zone_name" {
   description = "Name of the existing private Route 53 hosted zone"
   type        = string
-  default     = "dev.technologyhealth.swacorp.com"
+  default     = "dev.technologyhealth.ddarkecorp.com"
 }

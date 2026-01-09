@@ -14,7 +14,7 @@ sleep_wake_enabled         = true
 
 vpc_tag_name = "eto-prod-prod0-vpc"
 
-certificate_domain = "prod.technologyhealth.swacorp.com"
+certificate_domain = "prod.technologyhealth.ddarkecorp.com"
 
 container_image = "290503755741.dkr.ecr.us-west-2.amazonaws.com/sre/opsmon/frontend-deployment/backend:1.0.0"
 

@@ -106,7 +106,7 @@ module "vpc_endpoints" {
 
 #   rule {
 #     apply_server_side_encryption_by_default {
-#       kms_master_key_id = data.aws_kms_key.swa_kms_key.key_id
+#       kms_master_key_id = data.aws_kms_key.ddarke_kms_key.key_id
 #       sse_algorithm     = "aws:kms"
 #     }
 #     bucket_key_enabled = true
@@ -161,9 +161,9 @@ resource "aws_security_group" "vpc_endpoints" {
   description = "Security group for VPC endpoints"
   vpc_id      = module.vpc.vpc_id
 
-  #ingress from SWA-Network/On-Prem networks
+  #ingress from ddarke-Network/On-Prem networks
   ingress {
-    description = "HTTPS access from SWA-Network/On-Prem networks"
+    description = "HTTPS access from ddarke-Network/On-Prem networks"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"

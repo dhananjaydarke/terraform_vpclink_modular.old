@@ -14,8 +14,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi-releases/simple"
-reference = "swa-releases"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi-releases/simple"
+reference = "ddarke-releases"
 
 [[package]]
 name = "cfgv"
@@ -31,8 +31,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "distlib"
@@ -48,8 +48,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "filelock"
@@ -65,8 +65,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "identify"
@@ -85,8 +85,8 @@ license = ["ukkonen"]
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "nodeenv"
@@ -102,8 +102,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "platformdirs"
@@ -124,8 +124,8 @@ type = ["mypy (>=1.18.2)"]
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "pre-commit"
@@ -148,8 +148,8 @@ virtualenv = ">=20.10.0"
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "pyyaml"
@@ -236,8 +236,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [[package]]
 name = "virtualenv"
@@ -262,8 +262,8 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi/simple"
-reference = "swa-pypi"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi/simple"
+reference = "ddarke-pypi"
 
 [metadata]
 lock-version = "2.1"

@@ -78,26 +78,26 @@ module.exports = {
   branches: [
     {
       name: "master",
-      channel: "swa-releases"
+      channel: "DDARKE-releases"
     },
     {
       name: "release/v.alpha.x",
-      channel: "swa-releases",
+      channel: "DDARKE-releases",
       prerelease: "a"
     },
     {
       name: "release/v.beta.x",
-      channel: "swa-releases",
+      channel: "DDARKE-releases",
       prerelease: "b"
     },
     {
       name: "release/v.rc.x",
-      channel: "swa-releases",
+      channel: "DDARKE-releases",
       prerelease: "rc"
     },
     {
       name: getDevBranchName(),
-      channel: "swa-dev",
+      channel: "DDARKE-dev",
       prerelease: "dev",
     },
   ],

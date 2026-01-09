@@ -448,8 +448,8 @@ files = [
 
 [package.source]
 type = "legacy"
-url = "https://nexus-tools.swacorp.com/repository/pypi-releases/simple"
-reference = "swa-releases"
+url = "https://nexus-tools.ddarkecorp.com/repository/pypi-releases/simple"
+reference = "ddarke-releases"
 
 [[package]]
 name = "certifi"

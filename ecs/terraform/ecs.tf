@@ -20,7 +20,7 @@ module "ecs_cluster" {
 
   setting                                = [{ "name" : "containerInsights", "value" : var.container_insights_enabled }]
   cloudwatch_log_group_retention_in_days = var.cluster_log_retention
-  cloudwatch_log_group_kms_key_id        = data.aws_kms_key.swa_kms_key.arn
+  cloudwatch_log_group_kms_key_id        = data.aws_kms_key.ddarke_kms_key.arn
   # TODO: See if these capacity providers are working
   default_capacity_provider_strategy = {
     FARGATE = {
@@ -40,7 +40,7 @@ module "ecs_task_execution_role" {
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version                       = "~> 5.60.0"
   role_path                     = "/ccp-next/ecs/"
-  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/swa/SWACSPermissionsBoundary"
+  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ddarke/ddarkeCSPermissionsBoundary"
 
   create_role       = true
   role_name         = "${module.ecs_labels_short.id}-ecs-task-execution-role"
@@ -61,7 +61,7 @@ module "ecs_task_role" {
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
   version                       = "~> 5.60.0"
   role_path                     = "/ccp-next/ecs/"
-  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/swa/SWACSPermissionsBoundary"
+  role_permissions_boundary_arn = "arn:aws:iam::${local.account_id}:policy/ddarke/ddarkeCSPermissionsBoundary"
 
   create_role       = true
   role_name         = "${module.ecs_labels.id}-ecs-task-role"
@@ -174,7 +174,7 @@ module "ecs_service" {
 
       dependencies                           = []
       readonlyRootFilesystem                 = false
-      cloudwatch_log_group_kms_key_id        = data.aws_kms_key.swa_kms_key.arn
+      cloudwatch_log_group_kms_key_id        = data.aws_kms_key.ddarke_kms_key.arn
       cloudwatch_log_group_retention_in_days = 365
 
       // environment = [] //In case this is needed at another time else

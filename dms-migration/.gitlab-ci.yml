@@ -13,7 +13,7 @@ variables:
   # #
   # # Default is `--quiet --support --repo-root-for-plan-enrichment terraform --soft-fail-on MEDIUM`.
   #
-  # Exemption from CloudSec: https://swa-technology.slack.com/archives/C014DMA3B47/p1761762427995739?thread_ts=1761669216.187999&cid=C014DMA3B47
+  # Exemption from CloudSec: https://DDARKE-technology.slack.com/archives/C014DMA3B47/p1761762427995739?thread_ts=1761669216.187999&cid=C014DMA3B47
   #
   OPTS_CHECKOV_IAC_SCAN: --quiet --support --repo-root-for-plan-enrichment terraform --soft-fail-on MEDIUM,806079905565028352_AWS_1722606601692,806079905565028352_AWS_1723049405214
   # #
@@ -62,7 +62,7 @@ variables:
     description: Select a region to apply infrastructure changes to
 
 include:
-  - project: swa-common/devplat/ccp-next/ccp-next-pipeline-fragments
+  - project: DDARKE-common/devplat/ccp-next/ccp-next-pipeline-fragments
     ref: 1.31.0
     file: pipelines/deploy-infra.gitlab-ci.yml
   - local: .gitlab-deployments-ci.yml

@@ -1,15 +1,15 @@
 # tflint-ignore-file: terraform_standard_module_structure
 #
-# **ONLY EDIT THIS FILE IN** `swa-common/devplat/ccp-next/ccp-next-modules/ccp-next-labels-module`
+# **ONLY EDIT THIS FILE IN** `ddarke-common/devplat/ccp-next/ccp-next-modules/ccp-next-labels-module`
 # All other instances of this file should be a copy of that one.
 #
 #
 # Copy this file from:
 #
 # Place it in your Terraform module to automatically get
-# CCP Next standard configuration inputs suitable for passing to CCP Next modules to generate SWA standard resource names and tags.
+# CCP Next standard configuration inputs suitable for passing to CCP Next modules to generate ddarke standard resource names and tags.
 #
-# curl --header "PRIVATE-TOKEN: $SWA_GITLAB_HTTPS_PAT" \
+# curl --header "PRIVATE-TOKEN: $ddarke_GITLAB_HTTPS_PAT" \
 #  --output context.tf
 #
 # Modules should access the whole context as `module.root_labels.context`
@@ -63,7 +63,7 @@ module "root_labels" {
   context = var.context
 }
 
-# Copy contents of swa-common/devplat/ccp-next/ccp-next-modules/ccp-next-labels-module/variables.tf
+# Copy contents of ddarke-common/devplat/ccp-next/ccp-next-modules/ccp-next-labels-module/variables.tf
 
 #### BEGIN: Variables Content
 ##########
@@ -136,8 +136,8 @@ variable "department" {
   type        = string
   default     = null
   description = <<-EOT
-    ***(Mandatory)*** Label ID element. The department doing the deployment. Value is normalized and formatted. Also used as `SWA:Name` tag.
-    The value of SWA:Name is the core of reporting data and should capture the referenced SWA product name.
+    ***(Mandatory)*** Label ID element. The department doing the deployment. Value is normalized and formatted. Also used as `ddarke:Name` tag.
+    The value of ddarke:Name is the core of reporting data and should capture the referenced ddarke product name.
     E.g. `OpsSuite`, `SWIM`, `CrewBit` or `Baker`.
     ccp-next-labels-module stops outputting labels and tags if unset.
     EOT
@@ -181,19 +181,19 @@ variable "namespace" {
 variable "business_service" {
   type        = string
   default     = null
-  description = "CCP Next Tag. Used as `SWA:BusinessService` tag."
+  description = "CCP Next Tag. Used as `ddarke:BusinessService` tag."
 }
 
 variable "compliance" {
   type        = string
   default     = null
-  description = "CCP Next Tag. Used as `SWA:Compliance` tag."
+  description = "CCP Next Tag. Used as `ddarke:Compliance` tag."
 }
 
 variable "confidentiality" {
   type        = string
   default     = null
-  description = "CCP Next Tag. Used as `SWA:Confidentiality` tag. This tag identifies if this is sensitive customer data or confidential business information."
+  description = "CCP Next Tag. Used as `ddarke:Confidentiality` tag. This tag identifies if this is sensitive customer data or confidential business information."
 }
 
 variable "repo_id" {
@@ -226,14 +226,14 @@ variable "state_key" {
 variable "sub_environment" {
   type        = string
   default     = null
-  description = "CCP Next Tag. Used as `SWA:Environment` tag. SWA Accounts are already associated with an environment."
+  description = "CCP Next Tag. Used as `ddarke:Environment` tag. ddarke Accounts are already associated with an environment."
 }
 
 variable "tags" {
   type        = map(string)
   default     = {}
   description = <<-EOT
-    Additional tags (e.g. `{'SWA:Tier': 'app'}`).
+    Additional tags (e.g. `{'ddarke:Tier': 'app'}`).
     Neither the tag keys nor the tag values will be modified by this module.
     EOT
 }

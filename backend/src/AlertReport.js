@@ -6,13 +6,13 @@ import { logger, logError } from './Components/Logger.js'
 import { poolPromise } from './configurations/SQL/ConnectionPool.js'
 
 const localTest = process.env.LOCAL_TEST // true if EMAIL_USER/PASS are defined locally as env variables
-let fromEmail = `Technology Health Dashboard <teccmon@${hostname}.swacorp.com>`
+let fromEmail = `Technology Health Dashboard <teccmon@${hostname}.DARKE.com>`
 let transporterObj = { sendmail: true }
 
 if (localTest) {
     fromEmail = process.env.EMAIL_USER
     transporterObj = {
-        host: 'smtp.swacorp.com',
+        host: 'smtp.ddarkecorp.com',
         port: 587,
         secure: false,
         tls: { rejectUnauthorized: false }, // do not fail on invalid certs

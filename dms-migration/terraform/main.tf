@@ -17,7 +17,7 @@ module "database_migration_service" {
   repl_instance_publicly_accessible         = false
   repl_instance_class                       = "dms.t3.medium"
   repl_instance_id                          = "dms-migration-etothddb"
-  repl_instance_kms_key_arn                 = data.aws_kms_key.swa_kms_key.arn
+  repl_instance_kms_key_arn                 = data.aws_kms_key.DDARKE_kms_key.arn
   repl_instance_vpc_security_group_ids      = [aws_security_group.dms_security_group.id]
 
   # Endpoints
@@ -28,7 +28,7 @@ module "database_migration_service" {
       endpoint_type               = "source"
       engine_name                 = "sqlserver"
       extra_connection_attributes = "heartbeatFrequency=1;"
-      kms_key_arn                 = data.aws_kms_key.swa_kms_key.arn
+      kms_key_arn                 = data.aws_kms_key.DDARKE_kms_key.arn
       username                    = local.tecc_db_secrets.TECC_DB_USER
       password                    = local.tecc_db_secrets.TECC_DB_PASS
       port                        = 1433
@@ -42,7 +42,7 @@ module "database_migration_service" {
       endpoint_id   = var.dest_endpoint_id
       endpoint_type = "target"
       engine_name   = "sqlserver"
-      kms_key_arn   = data.aws_kms_key.swa_kms_key.arn
+      kms_key_arn   = data.aws_kms_key.DDARKE_kms_key.arn
       username      = local.thd_db_secrets.DB_USER
       password      = local.thd_db_secrets.DB_PASS
       port          = 1433
@@ -145,9 +145,9 @@ resource "aws_security_group" "dms_security_group" {
 
 data "aws_caller_identity" "current" {} # returns current account
 
-# Get a SWA KMS key for encrypting the DMS connections
-data "aws_kms_key" "swa_kms_key" {
-  key_id = "alias/swa_${local.account_id}_kms"
+# Get a DDARKE KMS key for encrypting the DMS connections
+data "aws_kms_key" "DDARKE_kms_key" {
+  key_id = "alias/DDARKE_${local.account_id}_kms"
 }
 
 locals {

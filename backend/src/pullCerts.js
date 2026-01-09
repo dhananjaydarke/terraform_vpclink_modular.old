@@ -11,7 +11,7 @@ const NAME = 'thd-backend/dev'
 const CERT_DIR = 'configurations/certificate'
 
 const certificates = [
-    'certificateswa.pem',
+    'certificateDDARKE.pem',
 ]
 
 const s3Client = new S3Client({})

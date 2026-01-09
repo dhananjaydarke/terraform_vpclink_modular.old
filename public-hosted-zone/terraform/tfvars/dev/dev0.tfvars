@@ -15,9 +15,9 @@ delegation_set_name = "etothd-r53-delegation-set"
 
 public_hosted_zones = [
   {
-    name        = "technologyhealth.dev.aws.swacorp.com",
+    name        = "technologyhealth.dev.aws.ddarkecorp.com",
     create_cert = true,
-    san_names   = ["*.technologyhealth.dev.aws.swacorp.com"]
+    san_names   = ["*.technologyhealth.dev.aws.ddarkecorp.com"]
     Alarms = {
       AssignmentGroup = "Technology Health Dashboard Support L3",
       Application     = "THD",
@@ -25,7 +25,7 @@ public_hosted_zones = [
     },
     tags = [
       { Key = "Usecase", Value = "public hosted zone" },
-      { Key = "SWA:BusinessService", Value = "SWA THD" },
+      { Key = "ddarke:BusinessService", Value = "ddarke THD" },
       { Key = "Owner", Value = "THD" }
     ]
   }

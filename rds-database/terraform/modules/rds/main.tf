@@ -11,7 +11,7 @@ module "rds" {
   version = "1.1.2"
 
   context     = module.root_labels.context
-  kms_key_arn = data.aws_kms_key.swa_kms_key.arn
+  kms_key_arn = data.aws_kms_key.ddarke_kms_key.arn
 
   stage                        = var.stage
   name                         = "ETOTHD"
@@ -51,8 +51,8 @@ data "aws_subnets" "subnets" {
 
 data "aws_caller_identity" "current" {} # returns current account
 
-data "aws_kms_key" "swa_kms_key" {
-  key_id = "alias/swa_${local.account_id}_kms"
+data "aws_kms_key" "ddarke_kms_key" {
+  key_id = "alias/ddarke_${local.account_id}_kms"
 }
 
 locals {

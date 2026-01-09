@@ -11,12 +11,12 @@ const grafanaDefinedStates = new Map() // copies of grafanaDefinedAlerts entries
 const dbStates = new Map() // state in DB of each unique API_Key/Alert_Id
 
 const grafanaRequest = {
-    host: 'em-grafana.ris.prod.swacorp.com',
+    host: 'em-grafana.ris.prod.DDARKEcorp.com',
     port: 443,
     path: '/api/alerts',
     method: 'GET',
-    // ca: fs.readFileSync('./configurations/certificate/certificateswa.pem', 'ascii'), //When importing to the Server.js, you have to use the relative path from the Server.js Path
-    ca: fs.readFileSync('../configurations/certificate/certificateswa.pem', 'ascii'), // Fixed path for Docker container
+    // ca: fs.readFileSync('./configurations/certificate/certificateDDARKE.pem', 'ascii'), //When importing to the Server.js, you have to use the relative path from the Server.js Path
+    ca: fs.readFileSync('../configurations/certificate/certificateDDARKE.pem', 'ascii'), // Fixed path for Docker container
     headers: {
         'Accept'        : 'application/json',
         'Content-Type'  : 'application/json',

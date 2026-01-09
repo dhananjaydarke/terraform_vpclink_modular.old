@@ -246,9 +246,9 @@ function getId(options) {
 async function authorizeGrafana(alertName, apiKey) {
     try {
         const encodedAlertName = alertName.replace(/ /g, '%20')
-        const certPath = process.env.CERT_PATH || './configurations/certificate/certificateswa.pem'
+        const certPath = process.env.CERT_PATH || './configurations/certificate/certificateDDARKE.pem'
         const options = {
-            host: 'em-grafana.ris.prod.swacorp.com',
+            host: 'em-grafana.ris.prod.DDARKEcorp.com',
             port: 443,
             path: '/api/alerts?query=' + encodedAlertName,
             method: 'GET',

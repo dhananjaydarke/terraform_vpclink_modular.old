@@ -16,8 +16,8 @@ dev:  # Environment
     # (optional) If `generate_attestation` is true, user-supplied script is executed to expose additional environment variables.
     # additional_attestation_data_script:
 
-    # (optional) Used to override the command: swauto_devops, which is used for executing job scripts within swautodevops-libraries.
-    # swautodevops_script:
+    # (optional) Used to override the command: ddarkeuto_devops, which is used for executing job scripts within ddarkeutodevops-libraries.
+    # ddarkeutodevops_script:
 
     variables:  # You can pass environment variables for namespace level deployment jobs
       # ***WARNING***: You have to get exemption from CloudSec (Slack channel: #team-cloudsecurity)

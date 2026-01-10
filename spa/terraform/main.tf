@@ -87,6 +87,7 @@ resource "aws_route53_record" "cloudfront_app_domain" {
 }
 
 resource "aws_route53_record" "backend_nlb_private" {
+    allow_overwrite = true
   name    = "app.${module.private_hosted_zones.private_hosted_zone_name}"
   type    = "A"
   zone_id = module.private_hosted_zones.private_hosted_zone_id
@@ -386,6 +387,9 @@ module "apigw" {
         any = {
           http_method      = "ANY"
           authorization    = "NONE"
+           request_parameters = {
+            "method.request.path.proxy" = true
+          }
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -393,6 +397,9 @@ module "apigw" {
             vpc_link_key         = "main"
             integration_method   = "ANY"
             uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/{proxy}"
+            request_parameters = {
+              "integration.request.path.proxy" = "method.request.path.proxy"
+            }
           }
         }
       }

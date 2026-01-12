@@ -388,7 +388,6 @@ module "apigw" {
           http_method   = "ANY"
           authorization = "NONE"
           api_key_required = false		  
-          api_key_required = false		  
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000

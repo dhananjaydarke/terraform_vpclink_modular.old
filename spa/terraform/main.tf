@@ -380,16 +380,15 @@ module "apigw" {
     api = {
       path_part = "api"
     }
-    proxy = {
+ proxy = {
       path_part  = "{proxy+}"
       parent_key = "api"
       methods = {
         any = {
-          http_method      = "ANY"
-          authorization    = "NONE"
-           request_parameters = {
-            "method.request.path.proxy" = true
-          }
+          http_method   = "ANY"
+          authorization = "NONE"
+          api_key_required = false		  
+          api_key_required = false		  
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -397,9 +396,82 @@ module "apigw" {
             vpc_link_key         = "main"
             integration_method   = "ANY"
             uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/{proxy}"
-            request_parameters = {
-              "integration.request.path.proxy" = "method.request.path.proxy"
-            }
+          }
+        }
+      }
+    }	
+    Sidebar = {
+      path_part  = "Sidebar"
+      parent_key = "api"
+      methods = {
+ get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false		  
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Sidebar"
+          }
+        }
+      }
+    }
+    Footer = {
+      path_part  = "Footer"
+      parent_key = "api"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false		  
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Footer"
+          }
+                  }
+      }
+    }
+    Location = {
+      path_part  = "Location"
+      parent_key = "api"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false		  
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Location"
+          }
+        }
+      }
+    }
+    RunbookJSON = {
+      path_part  = "RunbookJSON"
+      parent_key = "api"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false		  
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/RunbookJSON"
           }
         }
       }
@@ -412,6 +484,7 @@ module "apigw" {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
+          api_key_required = false		  
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -430,6 +503,7 @@ module "apigw" {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
+          api_key_required = false		  
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000

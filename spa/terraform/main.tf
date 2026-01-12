@@ -300,12 +300,160 @@ module "cloudfront" {
       //cached_methods             = ["GET", "HEAD"]
       use_forwarded_values       = false
       cache_policy_name          = "Managed-CachingDisabled"
-      origin_request_policy_name = "Managed-AllViewer"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
       //response_headers_policy_name = aws_cloudfront_response_headers_policy.api_cors.name
       response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+      function_association = {
+        viewer-request = {
+          function_arn = aws_cloudfront_function.strip_api_prefix.arn
+        }
+      }
 
+    },
+    {
+      path_pattern           = "/CreateAddition*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/UpdateItem*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/RemoveItem*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Login*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/CreateRunbook*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/All*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Location*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/LIAT*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/RunbookJSON*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Sidebar*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Footer*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/healthcheck_receive*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Operations*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
     }
-  ]
+  ]	
 
   web_acl_id = module.ddarke_only_waf.waf_arn
   aliases    = [module.private_hosted_zones.private_hosted_zone_name]
@@ -377,12 +525,8 @@ module "apigw" {
   }
 
   resources = {
-    api = {
-      path_part = "api"
-    }
  proxy = {
       path_part  = "{proxy+}"
-      parent_key = "api"
       methods = {
         any = {
           http_method   = "ANY"
@@ -401,9 +545,8 @@ module "apigw" {
     }	
     Sidebar = {
       path_part  = "Sidebar"
-      parent_key = "api"
       methods = {
- get = {
+		get = {
           http_method      = "GET"
           authorization    = "NONE"
           api_key_required = false		  
@@ -420,7 +563,6 @@ module "apigw" {
     }
     Footer = {
       path_part  = "Footer"
-      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -439,7 +581,6 @@ module "apigw" {
     }
     Location = {
       path_part  = "Location"
-      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -458,7 +599,6 @@ module "apigw" {
     }
     RunbookJSON = {
       path_part  = "RunbookJSON"
-      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -478,7 +618,6 @@ module "apigw" {
 
     healthcheck_receive = {
       path_part  = "healthcheck_receive"
-      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -497,7 +636,6 @@ module "apigw" {
     }
     Operations = { # FIXME - remove when healthcheck_receive is added to backend
       path_part  = "Operations"
-      parent_key = "api"
       methods = {
         get = {
           http_method      = "GET"
@@ -519,23 +657,7 @@ module "apigw" {
   stages = {
     test = {
       name                 = "test"
-      xray_tracing_enabled = true
-
-      access_log_settings = {
-        destination_arn = aws_cloudwatch_log_group.apigw_logs.arn
-        format = jsonencode({
-          requestId      = "$context.requestId"
-          ip             = "$context.identity.sourceIp"
-          caller         = "$context.identity.caller"
-          user           = "$context.identity.user"
-          requestTime    = "$context.requestTime"
-          httpMethod     = "$context.httpMethod"
-          resourcePath   = "$context.resourcePath"
-          status         = "$context.status"
-          protocol       = "$context.protocol"
-          responseLength = "$context.responseLength"
-        })
-      }
+      //xray_tracing_enabled = true
     }
   }
 

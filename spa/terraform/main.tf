@@ -12,6 +12,13 @@
 #     vpc_id = data.terraform_remote_state.vpc_network.outputs["vpc_id"]
 #   }
 # }
+resource "aws_cloudfront_function" "strip_api_prefix" {
+  name    = "strip-api-prefix"
+  runtime = "cloudfront-js-2.0"
+  comment = "cloudfront function to remove /api prefix for backend routing"
+  publish = true
+  code    = file("${path.cwd}/cloudfront_strip_api.js")
+}
 
 module "private_hosted_zones" { # creates private_hz and no apex_hz
   # use versioned module reference

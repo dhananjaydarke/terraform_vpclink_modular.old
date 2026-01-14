@@ -12,6 +12,7 @@
 #     vpc_id = data.terraform_remote_state.vpc_network.outputs["vpc_id"]
 #   }
 # }
+
 resource "aws_cloudfront_function" "strip_api_prefix" {
   name    = "strip-api-prefix"
   runtime = "cloudfront-js-2.0"
@@ -31,6 +32,7 @@ module "private_hosted_zones" { # creates private_hz and no apex_hz
 }
 
 module "s3_bucket_cf_primary" {
+  #checkov:skip=CKV2_AWS_62:S3 event notifications not required for static website hosting
   source        = "terraform-aws-modules/s3-bucket/aws"
   version       = "4.11.0"
   bucket        = "${var.cloudfront_origin_bucket_name}.${module.root_labels.environment}.${var.namespace}"
@@ -39,7 +41,7 @@ module "s3_bucket_cf_primary" {
     rule = {
       apply_server_side_encryption_by_default = {
         sse_algorithm     = "aws:kms"
-        kms_master_key_id = data.aws_kms_alias.ddarke_kms.arn
+        kms_master_key_id = data.aws_kms_alias.ddarke_kms.target_key_arn
       }
       bucket_key_enabled = true
     }
@@ -93,19 +95,6 @@ resource "aws_route53_record" "cloudfront_app_domain" {
   }
 }
 
-resource "aws_route53_record" "backend_nlb_private" {
-    allow_overwrite = true
-  name    = "app.${module.private_hosted_zones.private_hosted_zone_name}"
-  type    = "A"
-  zone_id = module.private_hosted_zones.private_hosted_zone_id
-
-  alias {
-    name                   = aws_lb.backend_nlb.dns_name
-    zone_id                = aws_lb.backend_nlb.zone_id
-    evaluate_target_health = false
-  }
-}
-
 resource "aws_route53_record" "cloudfront_public_domain" {
   name    = one(data.terraform_remote_state.public_hosted_zone.outputs.hosted_zone_names)
   type    = "A"
@@ -117,6 +106,20 @@ resource "aws_route53_record" "cloudfront_public_domain" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "backend_nlb_private" {
+  allow_overwrite = true
+  name            = "app.${module.private_hosted_zones.private_hosted_zone_name}"
+  type            = "A"
+  zone_id         = module.private_hosted_zones.private_hosted_zone_id
+
+  alias {
+    name                   = aws_lb.backend_nlb.dns_name
+    zone_id                = aws_lb.backend_nlb.zone_id
+    evaluate_target_health = false
+  }
+}
+
 
 resource "aws_cloudfront_function" "append_index_path" {
   name    = "redirect-to-index"
@@ -235,6 +238,7 @@ resource "aws_cloudfront_response_headers_policy" "api_cors" {
 
 module "cloudfront" {
   #checkov:skip=CKV_AWS_310:Origin failover not required for single S3 origin
+  #checkov:skip=CKV2_AWS_47:Log4j vulnerability mitigation handled by WAF rule group
   source                       = "terraform-aws-modules/cloudfront/aws"
   version                      = "4.2.0"
   comment                      = "thd-cloudfront-distribution"
@@ -307,7 +311,7 @@ module "cloudfront" {
       //cached_methods             = ["GET", "HEAD"]
       use_forwarded_values       = false
       cache_policy_name          = "Managed-CachingDisabled"
-      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      origin_request_policy_name = "Managed-AllViewer"
       //response_headers_policy_name = aws_cloudfront_response_headers_policy.api_cors.name
       response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
       function_association = {
@@ -315,7 +319,6 @@ module "cloudfront" {
           function_arn = aws_cloudfront_function.strip_api_prefix.arn
         }
       }
-
     },
     {
       path_pattern           = "/CreateAddition*"
@@ -406,17 +409,6 @@ module "cloudfront" {
       response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
     },
     {
-      path_pattern           = "/RunbookJSON*"
-      target_origin_id       = "apigw"
-      viewer_protocol_policy = "redirect-to-https"
-      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
-
-      use_forwarded_values       = false
-      cache_policy_name          = "Managed-CachingDisabled"
-      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
-      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
-    },
-    {
       path_pattern           = "/Sidebar*"
       target_origin_id       = "apigw"
       viewer_protocol_policy = "redirect-to-https"
@@ -459,8 +451,65 @@ module "cloudfront" {
       cache_policy_name          = "Managed-CachingDisabled"
       origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
       response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Cloud*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Cybersecurity*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Commercial*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/ISS*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
+    },
+    {
+      path_pattern           = "/Health*"
+      target_origin_id       = "apigw"
+      viewer_protocol_policy = "redirect-to-https"
+      allowed_methods        = ["GET", "HEAD", "OPTIONS", "POST", "PUT", "PATCH", "DELETE"]
+
+      use_forwarded_values       = false
+      cache_policy_name          = "Managed-CachingDisabled"
+      origin_request_policy_name = "Managed-AllViewerExceptHostHeader"
+      response_headers_policy_id = aws_cloudfront_response_headers_policy.api_cors.id
     }
-  ]	
+
+
+  ]
 
   web_acl_id = module.ddarke_only_waf.waf_arn
   aliases    = [module.private_hosted_zones.private_hosted_zone_name]
@@ -532,13 +581,13 @@ module "apigw" {
   }
 
   resources = {
- proxy = {
-      path_part  = "{proxy+}"
+    proxy = {
+      path_part = "{proxy+}"
       methods = {
         any = {
-          http_method   = "ANY"
-          authorization = "NONE"
-          api_key_required = false		  
+          http_method      = "ANY"
+          authorization    = "NONE"
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -549,14 +598,14 @@ module "apigw" {
           }
         }
       }
-    }	
+    }
     Sidebar = {
-      path_part  = "Sidebar"
+      path_part = "Sidebar"
       methods = {
-		get = {
+        get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -569,12 +618,12 @@ module "apigw" {
       }
     }
     Footer = {
-      path_part  = "Footer"
+      path_part = "Footer"
       methods = {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -583,16 +632,16 @@ module "apigw" {
             integration_method   = "ANY"
             uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Footer"
           }
-                  }
+        }
       }
     }
     Location = {
-      path_part  = "Location"
+      path_part = "Location"
       methods = {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -604,32 +653,30 @@ module "apigw" {
         }
       }
     }
-    RunbookJSON = {
-      path_part  = "RunbookJSON"
+    Health = {
+      path_part = "Health"
       methods = {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
             connection_type      = "VPC_LINK"
             vpc_link_key         = "main"
             integration_method   = "ANY"
-            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/RunbookJSON"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Health"
           }
         }
       }
     }
-
     healthcheck_receive = {
-      path_part  = "healthcheck_receive"
+      path_part = "healthcheck_receive"
       methods = {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -641,13 +688,13 @@ module "apigw" {
         }
       }
     }
-    Operations = { # FIXME - remove when healthcheck_receive is added to backend
-      path_part  = "Operations"
+    Operations = {
+      path_part = "Operations"
       methods = {
         get = {
           http_method      = "GET"
           authorization    = "NONE"
-          api_key_required = false		  
+          api_key_required = false
           integration_type = "HTTP_PROXY"
           integration_config = {
             timeout_milliseconds = 29000
@@ -659,12 +706,164 @@ module "apigw" {
         }
       }
     }
+    Commercial = {
+      path_part = "Commercial"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Commercial"
+          }
+        }
+      }
+    }
+    Cloud = {
+      path_part = "Cloud"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Cloud"
+          }
+        }
+      }
+    }
+    Cybersecurity = {
+      path_part = "Cybersecurity"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/Cybersecurity"
+          }
+        }
+      }
+    }
+    ISS = {
+      path_part = "ISS"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/ISS"
+          }
+        }
+      }
+    }
+
+    RunbookJSON = {
+      path_part = "RunbookJSON"
+    }
+    RunbookJSON_All = {
+      path_part  = "All"
+      parent_key = "RunbookJSON"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/RunbookJSON/All"
+          }
+        }
+      }
+    }
+    /*
+    RunbookJSON_RBOperations = {
+      path_part  = "Operations"
+      parent_key = "RunbookJSON"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/RunbookJSON/Operations"
+          }
+        }
+      }
+    }
+    RunbookJSON_RBCommercial = {
+      path_part  = "Commercial"
+      parent_key = "RunbookJSON"
+      methods = {
+        get = {
+          http_method      = "GET"
+          authorization    = "NONE"
+          api_key_required = false
+          integration_type = "HTTP_PROXY"
+          integration_config = {
+            timeout_milliseconds = 29000
+            connection_type      = "VPC_LINK"
+            vpc_link_key         = "main"
+            integration_method   = "ANY"
+            uri                  = "https://app.${module.private_hosted_zones.private_hosted_zone_name}/RunbookJSON/Commercial"
+          }
+        }
+      }
+    }
+    */
+
   }
 
   stages = {
     test = {
       name                 = "test"
-      //xray_tracing_enabled = true
+      xray_tracing_enabled = true
+
+      access_log_settings = {
+        destination_arn = aws_cloudwatch_log_group.apigw_logs.arn
+        format = jsonencode({
+          requestId      = "$context.requestId"
+          ip             = "$context.identity.sourceIp"
+          caller         = "$context.identity.caller"
+          user           = "$context.identity.user"
+          requestTime    = "$context.requestTime"
+          httpMethod     = "$context.httpMethod"
+          resourcePath   = "$context.resourcePath"
+          status         = "$context.status"
+          protocol       = "$context.protocol"
+          responseLength = "$context.responseLength"
+        })
+      }
     }
   }
 

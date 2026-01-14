@@ -11,7 +11,7 @@ const getBaseUrl = () => {
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
         return `${window.location.protocol}//${hostname}:3000`
     }
-    return `${window.location.protocol}//${hostname}/api`
+    return `${window.location.protocol}//${hostname}`
 }
 
 

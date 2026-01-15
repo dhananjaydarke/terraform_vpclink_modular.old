@@ -18,7 +18,7 @@ resource "aws_cloudfront_function" "strip_api_prefix" {
   runtime = "cloudfront-js-2.0"
   comment = "cloudfront function to remove /api prefix for backend routing"
   publish = true
-  code    = file("${path.cwd}/cloudfront_strip_api.js")
+  code    = file("${path.module}/cloudfront_strip_api.js")
 }
 
 module "private_hosted_zones" { # creates private_hz and no apex_hz

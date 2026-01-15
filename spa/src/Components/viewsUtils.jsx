@@ -6,7 +6,7 @@ const fetchData = async(urlEnd) => { // Function to grab the data from the backe
     // Check if urlEnd is an endpoint constant or a direct path
     if (API_CONFIG.ENDPOINTS[urlEnd]) {
         url = buildApiUrl(urlEnd)
-    } else if (urlEnd.includes('/')) {
+    } else if (typeof urlEnd === 'string' && urlEnd.includes('/')) {
         // Handle paths like 'RUNBOOK_JSON/someId'
         const [endpoint, ...pathParts] = urlEnd.split('/')
         if (API_CONFIG.ENDPOINTS[endpoint]) {
@@ -18,7 +18,6 @@ const fetchData = async(urlEnd) => { // Function to grab the data from the backe
         // Fallback for direct paths
         url = `${API_CONFIG.BASE_URL}/${urlEnd}`
     }
-
     try {
         const response = await fetch(url)
         if (!response.ok) {
